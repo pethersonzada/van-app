@@ -1,4 +1,5 @@
 import React from 'react';
+import { Ionicons } from '@expo/vector-icons'
 import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 export default function Index(){
@@ -31,7 +32,7 @@ export default function Index(){
 
             <View style={style.container}>
 
-                <Text style={style.subtitle}>Entre ou Crie sua Conta!</Text>
+                <Text style={style.subtitle}>Entre ou Crie uma Conta!</Text>
 
                 <View style={style.emailField}>
 
@@ -49,8 +50,9 @@ export default function Index(){
 
                         <TextInput style={style.textInputField} onChangeText={onChangePass} value={textPass} placeholder={'Insira aqui a sua Senha'} secureTextEntry={!showPass}></TextInput>
 
-                        <TouchableOpacity onPress={() => setShowPass(!showPass)} style={{marginTop: 15}}>
-                            <Text>{showPass ? 'Ocultar Senha' : 'Ver Senha'}</Text>
+                        <TouchableOpacity onPress={() => setShowPass(!showPass)} style={{left: 120, bottom: 40}}>
+                            <Ionicons name={showPass ? 'eye-off' : 'eye'} size={24} color="black"
+                            />
                         </TouchableOpacity>
 
                     </View>
@@ -80,9 +82,9 @@ const style = StyleSheet.create({
     },
 
     appLogo: {
-        top: 30,
+        top: 50,
         alignSelf: 'center',
-        height: 150,
+        height: 100,
         width: 150
     },
 
@@ -108,16 +110,16 @@ const style = StyleSheet.create({
     },
 
     subtitle: {
-        fontSize: 38,
+        fontSize: 40,
         fontWeight: '600',
         color: 'black',
-        top: -80,
+        top: -60,
         textAlign: 'center'
     },
 
     fieldText: {
         alignSelf: 'flex-start',
-        fontSize: 30,
+        fontSize: 20,
         paddingBottom: 10
     },
 
@@ -129,7 +131,7 @@ const style = StyleSheet.create({
     },
 
     emailField: {
-        marginTop: -50,
+        marginTop: -40,
         alignItems: 'center',
     },
 
