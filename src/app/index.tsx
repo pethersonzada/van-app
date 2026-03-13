@@ -1,10 +1,25 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View, TouchableOpacity, Image} from "react-native";
+import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 export default function Index(){
 
     const [textMail, onChangeMail] = React.useState('')
     const [textPass, onChangePass] = React.useState('')
+    const [showPass, setShowPass] = React.useState(false)
+    
+    const mockUser = {
+        email: 'teste@gmail.com',
+        password: 'teste123'
+    }
+
+    function handleLogin() {
+        if(textMail === mockUser.email && textPass === mockUser.password) {
+            Alert.alert('Sucesso', 'Login Realizado')
+        }
+        else {
+            Alert.alert('Erro', 'Email ou Senha Incorretos')
+        }
+    }
 
     return (
         <View style={style.wrapper}>
@@ -30,10 +45,19 @@ export default function Index(){
 
                     <Text style={style.fieldText}>Senha</Text>
 
-                    <TextInput style={style.textInputField} onChangeText={onChangePass} value={textPass} placeholder={'Insira aqui a sua Senha'}></TextInput>
+                    <View style={style.passwordView}>
+
+                        <TextInput style={style.textInputField} onChangeText={onChangePass} value={textPass} placeholder={'Insira aqui a sua Senha'} secureTextEntry={!showPass}></TextInput>
+
+                        <TouchableOpacity onPress={() => setShowPass(!showPass)} style={{marginTop: 15}}>
+                            <Text>{showPass ? 'Ver senha' : 'Ocultar senha'}</Text>
+                        </TouchableOpacity>
+
+                    </View>
+                    
                 </View>
                 
-                <TouchableOpacity style={style.mainButton}>
+                <TouchableOpacity style={style.mainButton} onPress={handleLogin}>
 
                     <Text style={style.mainButtonText}>Log in</Text>
 
@@ -129,5 +153,10 @@ const style = StyleSheet.create({
         fontSize: 20,
         color: 'white'
     },
+
+    passwordView: {
+        flexDirection: 'column',
+        alignItems: 'center',
+    }
 
 })
