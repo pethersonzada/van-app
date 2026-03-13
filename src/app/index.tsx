@@ -50,7 +50,7 @@ export default function Index(){
                         <TextInput style={style.textInputField} onChangeText={onChangePass} value={textPass} placeholder={'Insira aqui a sua Senha'} secureTextEntry={!showPass}></TextInput>
 
                         <TouchableOpacity onPress={() => setShowPass(!showPass)} style={{marginTop: 15}}>
-                            <Text>{showPass ? 'Ver senha' : 'Ocultar senha'}</Text>
+                            <Text>{showPass ? 'Ocultar Senha' : 'Ver Senha'}</Text>
                         </TouchableOpacity>
 
                     </View>
