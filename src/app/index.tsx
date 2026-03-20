@@ -1,17 +1,14 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons'
 import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import Button from '../components/Button'
+import { mockUser } from '../mock/user'
 
 export default function Index() {
 
     const [textMail, onChangeMail] = React.useState('')
     const [textPass, onChangePass] = React.useState('')
     const [showPass, setShowPass] = React.useState(false)
-
-    const mockUser = {
-        email: 'teste@gmail.com',
-        password: 'teste123'
-    }
 
     function handleLogin() {
         if (textMail === mockUser.email && textPass === mockUser.password) {
@@ -26,7 +23,7 @@ export default function Index() {
         <View style={style.wrapper}>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 
-                <Image style={style.appLogo} source={require('../../assets/images/logo-app.png')}/>
+                <Image style={style.appLogo} source={require('../../assets/images/logo-app.png')} />
 
             </View>
 
@@ -34,7 +31,7 @@ export default function Index() {
 
                 <Text style={style.subtitle}>Entre agora!</Text>
 
-                <View style={{gap: 60}}>
+                <View style={{ gap: 60 }}>
 
                     <View style={style.fieldContainer}>
 
@@ -68,12 +65,7 @@ export default function Index() {
                 </View>
 
                 <View style={{ justifyContent: 'space-between' }}>
-                    <TouchableOpacity style={style.mainButton} onPress={handleLogin}>
-
-                        <Text style={style.mainButtonText}>Log in</Text>
-
-                    </TouchableOpacity>
-
+                    <Button label="Log In" onPress={handleLogin} />
                     <Text style={{ textAlign: 'center', margin: 10 }}>Ainda não tem uma conta? Crie uma!</Text>
                 </View>
 
@@ -147,21 +139,6 @@ const style = StyleSheet.create({
     fieldContainer: {
         alignItems: 'center',
         width: '85%'
-    },
-
-    mainButton: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 15,
-        height: 60,
-        width: 300,
-        backgroundColor: 'black',
-        
-    },
-
-    mainButtonText: {
-        fontSize: 20,
-        color: 'white'
     },
 
     inputWrapper: {
