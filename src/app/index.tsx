@@ -1,8 +1,8 @@
 import React from 'react';
-import { Ionicons } from '@expo/vector-icons'
+import Button from '../components/Button';
+import { Ionicons } from '@expo/vector-icons';
 import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
-import Button from '../components/Button'
-import { mockUser } from '../mock/user'
+import { mockUser } from '../mock/user';
 
 export default function Index() {
 
@@ -29,9 +29,9 @@ export default function Index() {
 
             <View style={style.container}>
 
-                <Text style={style.subtitle}>Entre agora!</Text>
+                <Text style={style.subtitle}>Entre ou crie sua conta!</Text>
 
-                <View style={{ gap: 60 }}>
+                <View style={{ gap: 40 }}>
 
                     <View style={style.fieldContainer}>
 
@@ -66,7 +66,7 @@ export default function Index() {
 
                 <View style={{ justifyContent: 'space-between' }}>
                     <Button label="Log In" onPress={handleLogin} />
-                    <Text style={{ textAlign: 'center', margin: 10 }}>Ainda não tem uma conta? Crie uma!</Text>
+                    <Text style={{ textAlign: 'center', margin: 15 }}>Ainda não tem uma conta? Crie uma!</Text>
                 </View>
 
 
