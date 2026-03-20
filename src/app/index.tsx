@@ -2,19 +2,19 @@ import React from 'react';
 import { Ionicons } from '@expo/vector-icons'
 import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
-export default function Index(){
+export default function Index() {
 
     const [textMail, onChangeMail] = React.useState('')
     const [textPass, onChangePass] = React.useState('')
     const [showPass, setShowPass] = React.useState(false)
-    
+
     const mockUser = {
         email: 'teste@gmail.com',
         password: 'teste123'
     }
 
     function handleLogin() {
-        if(textMail === mockUser.email && textPass === mockUser.password) {
+        if (textMail === mockUser.email && textPass === mockUser.password) {
             Alert.alert('Sucesso', 'Login Realizado')
         }
         else {
@@ -24,48 +24,59 @@ export default function Index(){
 
     return (
         <View style={style.wrapper}>
-            <View>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 
-                <Image style={style.appLogo} source={require('../../assets/images/logo-app.png')}></Image>
+                <Image style={style.appLogo} source={require('../../assets/images/logo-app.png')}/>
 
             </View>
 
             <View style={style.container}>
 
-                <Text style={style.subtitle}>Entre ou Crie uma Conta!</Text>
+                <Text style={style.subtitle}>Entre agora!</Text>
 
-                <View style={style.emailField}>
+                <View style={{gap: 60}}>
 
-                    <Text style={style.fieldText}>Email</Text>
+                    <View style={style.fieldContainer}>
 
-                    <TextInput style={style.textInputField} onChangeText={onChangeMail} value={textMail} placeholder={'Insira aqui o seu Email'}></TextInput>
+                        <Text style={style.fieldText}>Email</Text>
 
-                </View>
-                
-                <View style={style.passwordField}>
+                        <View style={style.inputWrapper}>
+                            <Ionicons name='mail' size={20} color='black' style={style.inputIcon} />
 
-                    <Text style={style.fieldText}>Senha</Text>
+                            <TextInput style={style.textInputField} onChangeText={onChangeMail} value={textMail} placeholder={'Insira aqui o seu Email'}></TextInput>
+                        </View>
 
-                    <View style={style.passwordView}>
-
-                        <TextInput style={style.textInputField} onChangeText={onChangePass} value={textPass} placeholder={'Insira aqui a sua Senha'} secureTextEntry={!showPass}></TextInput>
-
-                        <TouchableOpacity onPress={() => setShowPass(!showPass)} style={{left: 120, bottom: 40}}>
-                            <Ionicons name={showPass ? 'eye-off' : 'eye'} size={24} color="black"
-                            />
-                        </TouchableOpacity>
 
                     </View>
-                    
+
+                    <View style={style.fieldContainer}>
+
+                        <Text style={style.fieldText}>Senha</Text>
+
+                        <View style={style.inputWrapper}>
+
+                            <Ionicons name='lock-closed' size={20} color='black' style={style.inputIcon} />
+                            <TextInput style={style.textInputField} onChangeText={onChangePass} value={textPass} placeholder={'Insira aqui a sua Senha'} secureTextEntry={!showPass}></TextInput>
+
+                            <TouchableOpacity style={style.eyeIcon} onPress={() => setShowPass(!showPass)}>
+                                <Ionicons name={showPass ? 'eye-off' : 'eye'} size={24} color="black"
+                                />
+                            </TouchableOpacity>
+
+                        </View>
+                    </View>
                 </View>
-                
-                <TouchableOpacity style={style.mainButton} onPress={handleLogin}>
 
-                    <Text style={style.mainButtonText}>Log in</Text>
+                <View style={{ justifyContent: 'space-between' }}>
+                    <TouchableOpacity style={style.mainButton} onPress={handleLogin}>
 
-                </TouchableOpacity>
+                        <Text style={style.mainButtonText}>Log in</Text>
 
-                <Text>Ainda não tem uma conta? Crie uma!</Text>
+                    </TouchableOpacity>
+
+                    <Text style={{ textAlign: 'center', margin: 10 }}>Ainda não tem uma conta? Crie uma!</Text>
+                </View>
+
 
             </View>
         </View>
@@ -78,12 +89,11 @@ const style = StyleSheet.create({
         flex: 1,
         justifyContent: 'space-between',
         width: '100%',
-        backgroundColor: 'black'
+        backgroundColor: 'black',
+        alignItems: 'center'
     },
 
     appLogo: {
-        top: 50,
-        alignSelf: 'center',
         height: 100,
         width: 150
     },
@@ -101,44 +111,42 @@ const style = StyleSheet.create({
     **/
 
     container: {
-        backgroundColor: '#f9f9f9',
+        backgroundColor: '#f5f5f5',
         height: '79%',
+        width: '100%',
         borderTopLeftRadius: 50,
         borderTopRightRadius: 50,
-        justifyContent: 'center',
-        alignItems: 'center'
+        justifyContent: 'space-between',
+        paddingTop: 80,
+        paddingBottom: 80,
+        alignItems: 'center',
+        gap: 30
     },
 
     subtitle: {
         fontSize: 40,
         fontWeight: '600',
         color: 'black',
-        top: -60,
-        textAlign: 'center'
+        textAlign: 'center',
     },
 
     fieldText: {
         alignSelf: 'flex-start',
         fontSize: 20,
-        paddingBottom: 10
+        marginBottom: 15
     },
 
     textInputField: {
-        width: 300,
+        width: '85%',
+        height: 55,
         backgroundColor: '#ffffff',
-        padding: 20,
         borderRadius: 10,
+        paddingLeft: 45
     },
 
-    emailField: {
-        marginTop: -40,
+    fieldContainer: {
         alignItems: 'center',
-    },
-
-    passwordField: {
-        marginTop: 50,
-        alignItems: 'center',
-        marginBottom: 80
+        width: '85%'
     },
 
     mainButton: {
@@ -148,7 +156,7 @@ const style = StyleSheet.create({
         height: 60,
         width: 300,
         backgroundColor: 'black',
-        bottom: 30
+        
     },
 
     mainButtonText: {
@@ -156,9 +164,21 @@ const style = StyleSheet.create({
         color: 'white'
     },
 
-    passwordView: {
-        flexDirection: 'column',
+    inputWrapper: {
+        position: 'relative',
+        flexDirection: 'row',
         alignItems: 'center',
+    },
+
+    eyeIcon: {
+        position: 'absolute',
+        right: 15,
+    },
+
+    inputIcon: {
+        position: 'absolute',
+        left: 15,
+        zIndex: 1
     }
 
 })
