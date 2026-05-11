@@ -1,6 +1,7 @@
-import React from "react";
-import { TextInput, StyleSheet, View } from "react-native";
+import React, {useState} from "react";
+import { TextInput, StyleSheet, View, TouchableOpacity } from "react-native";
 import {Shadow} from "react-native-shadow-2";
+import { Ionicons } from "@expo/vector-icons";
 type InputProps={
     placeholder:string;
     value:string;
@@ -12,6 +13,9 @@ type InputProps={
     onSubmitEditing?:()=>void;
 };
 const Input=({placeholder, value, onChangeText, secureTextEntry, keyboardType,autoCapitalize,onSubmitEditing, style}: InputProps)=>{
+
+    const [escondido, setEscondido] = useState(secureTextEntry);
+
     return (
         <Shadow distance={8}
                 startColor={"#59748c90"} 
@@ -25,11 +29,23 @@ const Input=({placeholder, value, onChangeText, secureTextEntry, keyboardType,au
                     placeholder={placeholder} placeholderTextColor={"#59748c"}
                     value={value} 
                     onChangeText={onChangeText}
-                    secureTextEntry={secureTextEntry}
+                    secureTextEntry={escondido}
                     keyboardType={keyboardType}
                     autoCapitalize={autoCapitalize}
                     onSubmitEditing={onSubmitEditing}
                 />
+                {secureTextEntry !== undefined && (
+                    <TouchableOpacity 
+                        style={styles.iconContainer} 
+                        onPress={() => setEscondido(!escondido)}
+                    >
+                        <Ionicons 
+                            name={escondido ? "eye-off" : "eye"} 
+                            size={24} 
+                            color="#59748c" 
+                        />
+                    </TouchableOpacity>
+                )}
             </View>
         </Shadow>
     );
@@ -44,14 +60,22 @@ const styles=StyleSheet.create({
         borderRadius:15,
         paddingHorizontal:10,
         justifyContent:"center",
+        overflow:"hidden",
+        flexDirection: "row",
+        alignItems: "center",
     },
     input:{
+        flex:1,
         fontFamily:"Lato",
         padding:10,
         fontSize:20,
-        color:"#59748c",
-        width:"100%", 
+        color:"#59748c", 
     },
+    iconContainer:{
+        paddingRight:10,
+        justifyContent:"center",
+        alignItems:"flex-end",
+    }
 });
 
 export default Input;
