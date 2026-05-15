@@ -8,9 +8,10 @@ type InputProps={
     onChangeText:(text:string)=>void;
     secureTextEntry?:boolean;
     style?:any;
-    keyboardType?:"default"|"email-address"|"numeric";
+    keyboardType?:"default"|"email-address"|"numeric"|"phone-pad";
     autoCapitalize?:"none"|"sentences"|"words"|"characters";
     onSubmitEditing?:()=>void;
+    maxLength?:number;
 };
 const Input=({placeholder, value, onChangeText, secureTextEntry, keyboardType,autoCapitalize,onSubmitEditing, style}: InputProps)=>{
 
@@ -68,7 +69,7 @@ const styles=StyleSheet.create({
         flex:1,
         fontFamily:"Lato",
         padding:10,
-        fontSize:20,
+        fontSize:16,
         color:"#59748c", 
     },
     iconContainer:{

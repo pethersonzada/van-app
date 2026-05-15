@@ -2,35 +2,41 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, Image ,ScrollView, TouchableOpacity,KeyboardAvoidingView, Platform} from "react-native";
 import Title from "../components/Title";
 import { SegmentedControl } from "../components/segmentedcontrol";
-import Input from "../components/Input";
-import {Button} from "../components/Buttonn";
-import {SocialButton} from "../components/SocialButton";
-import {useRouter} from "expo-router";
-
+import {SingUpCard} from "../components/SingUpCard";
+import { AddressCard } from "../components/AddressCard";
 const SingUp=()=>{
 
-    const [tipo, setTipo] = useState('Passageiro');
+    const [tipo, setTipo] = useState("Passageiro");
 
     return(
-        <View style={styles.container}>
+        <KeyboardAvoidingView style={styles.keyboardavoiding} behavior={Platform.OS === "ios" ? "padding" : undefined}>
+        <ScrollView><View style={styles.container}>
             <Title style={styles.title} text=" Cadastro "/>
             <Title style={styles.subTitle} text=" Quem é você na van? "/>
             <SegmentedControl 
-                opcoes={['Passageiro', 'Motorista']} 
+                opcoes={["Passageiro", "Motorista"]} 
                 selecionado={tipo} 
                 onChange={setTipo} 
             />
 
-            {tipo === 'Passageiro' ? (
-                <Text>Campos do Passageiro...</Text>
+            {tipo === "Passageiro" ? (
+                <>
+                <SingUpCard />
+                <AddressCard />
+                </>
             ) : (
                 <Text>Campos do Motorista (Placa, Van, etc)...</Text>
             )}
         </View>
+        </ScrollView>
+        </KeyboardAvoidingView>
 
     );
 }
 const styles=StyleSheet.create({
+    keyboardavoiding:{
+        flex:1
+    },
     container:{
         flex:1,
         backgroundColor:"#9AAFC2",

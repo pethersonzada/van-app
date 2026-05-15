@@ -5,13 +5,12 @@ type TitleProps={
     text:string;
     style?: any;
 }
-const Title = ({text, style}: TitleProps)=>{
 
+const Title = ({text, style}: TitleProps)=>{
     return <Text style={[styles.title, style]}>{text}</Text>
-    };
+};
 
 const styles=StyleSheet.create({
-    
     title:{
         fontFamily:"DMSansBold",
         fontSize:40,
@@ -19,8 +18,9 @@ const styles=StyleSheet.create({
         textShadowColor:"#59748c",
         textShadowOffset: {width: 4, height: 4},
         textShadowRadius:5,
-        justifyContent:"center",
-        alignItems:"center"
+        textAlign:"center", 
+        width: "100%" 
     },
 });
+
 export default Title;
