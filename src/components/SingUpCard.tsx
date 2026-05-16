@@ -1,15 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Alert } from "react-native";
 import { MaskService } from 'react-native-masked-text';
 import Input from "./Input";
 import Title from "./Title";
-export const SingUpCard = () => {
+export const SingUpCard = ({ onDataChange }: any) => {
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [confirmarSenha, setConfirmarSenha] = useState("");
     const [dataNasc, setDataNasc] = useState("");
     const [telefone, setTelefone] = useState("");
+    useEffect(() => {
+        onDataChange({
+            nome,
+            email,
+            senha,
+            confirmarSenha,
+            dataNasc,
+            telefone
+        });
+    }, [nome, email, senha, confirmarSenha, dataNasc, telefone]);
 
     const handleSignUp = () => {
 
@@ -63,13 +73,15 @@ export const SingUpCard = () => {
             <Title style={styles.title} text="Informações Pessoais" />
             <Title style={styles.subtitle}text="Nome Completo"/>
             <Input 
-                placeholder="Ex:João Silva" 
+                placeholder="Ex: João Silva" 
                 value={nome} 
-                onChangeText={setNome} 
+                onChangeText={setNome}
+                keyboardType="default"
+                autoCapitalize="words"
             />
             <Title style={styles.subtitle}text="E-mail"/>
             <Input 
-                placeholder="Ex:Seuemail@email.com" 
+                placeholder="Ex: Seuemail@email.com" 
                 value={email} 
                 onChangeText={setEmail}
                 keyboardType="email-address"
@@ -80,14 +92,20 @@ export const SingUpCard = () => {
                 placeholder="Mínimo 8 caracteres" 
                 value={senha} 
                 onChangeText={setSenha}
-                secureTextEntry={true} 
+                secureTextEntry={true}
+                keyboardType="default"
+                autoCapitalize="none"
+                minLength={8}
             />
             <Title style={styles.subtitle}text="Confirme sua senha"/>
             <Input 
                 placeholder="Repita sua senha" 
                 value={confirmarSenha} 
                 onChangeText={setConfirmarSenha}
-                secureTextEntry={true} 
+                secureTextEntry={true}
+                keyboardType="default"
+                autoCapitalize="none"
+                
             />
             <View style={styles.rowtitle}><Title style={styles.subtitlerow}text="Data de nascimento"/>
             <Title style={styles.subtitlerow}text="Telefone"/></View>
@@ -103,6 +121,7 @@ export const SingUpCard = () => {
                         }}
                         keyboardType="numeric"
                         maxLength={10}
+                        minLength={10}
                     />
                 </View>
 
@@ -121,6 +140,7 @@ export const SingUpCard = () => {
                         }}
                         keyboardType="phone-pad"
                         maxLength={15}
+                        minLength={15}
                     />
                 </View>
             </View>
@@ -130,8 +150,9 @@ export const SingUpCard = () => {
 
 const styles = StyleSheet.create({
     container: {
+        marginTop:20,
         width: "95%",
-        backgroundColor: "#354d62",
+        backgroundColor: "#9AAFC2",
         alignItems: "center",
         justifyContent: "center",
         borderRadius: 15,
@@ -139,20 +160,20 @@ const styles = StyleSheet.create({
         gap: 15,
     },
     title: {
-        fontSize: 24,
-        color: "#FFF",
+        fontSize: 30,
+        color: "#f0f9ff",
         marginBottom: 10,
     },
     subtitle:{
         fontSize:20,
         textAlign:"left",
         padding:5,
-        margin:-15
+        margin:-8
     },
     subtitlerow: {
     fontSize: 16,
-    color: "#FFF",
-    width: "50%", // Mesma largura do halfInput
+    color: "#f0f9ff",
+    width: "50%",
     textAlign: "left",
     marginBottom:-5
 },
@@ -169,5 +190,6 @@ const styles = StyleSheet.create({
     },
     halfInput: {
         width: "48%",
+        marginBottom:8,
     }
 });

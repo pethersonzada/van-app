@@ -12,6 +12,8 @@ type InputProps={
     autoCapitalize?:"none"|"sentences"|"words"|"characters";
     onSubmitEditing?:()=>void;
     maxLength?:number;
+    minLength?:number;
+    
 };
 const Input=({placeholder, value, onChangeText, secureTextEntry, keyboardType,autoCapitalize,onSubmitEditing, style}: InputProps)=>{
 
@@ -24,30 +26,31 @@ const Input=({placeholder, value, onChangeText, secureTextEntry, keyboardType,au
                 stretch={true} 
                 containerStyle={[{width:"100%"}, style]}>
 
-            <View style={styles.container}>
-                <TextInput
-                    style={styles.input}
-                    placeholder={placeholder} placeholderTextColor={"#59748c"}
-                    value={value} 
-                    onChangeText={onChangeText}
-                    secureTextEntry={escondido}
-                    keyboardType={keyboardType}
-                    autoCapitalize={autoCapitalize}
-                    onSubmitEditing={onSubmitEditing}
-                />
-                {secureTextEntry !== undefined && (
-                    <TouchableOpacity 
-                        style={styles.iconContainer} 
-                        onPress={() => setEscondido(!escondido)}
-                    >
-                        <Ionicons 
-                            name={escondido ? "eye-off" : "eye"} 
-                            size={24} 
-                            color="#59748c" 
+                    <View style={styles.container}>
+                        <TextInput
+                            style={styles.input}
+                            placeholder={placeholder} placeholderTextColor={"#59748c"}
+                            value={value} 
+                            onChangeText={onChangeText}
+                            secureTextEntry={escondido}
+                            keyboardType={keyboardType}
+                            autoCapitalize={autoCapitalize}
+                            onSubmitEditing={onSubmitEditing}
+
                         />
-                    </TouchableOpacity>
-                )}
-            </View>
+                        {secureTextEntry !== undefined && (
+                            <TouchableOpacity 
+                                style={styles.iconContainer} 
+                                onPress={() => setEscondido(!escondido)}
+                            >
+                                <Ionicons 
+                                    name={escondido ? "eye-off" : "eye"} 
+                                    size={24} 
+                                    color="#59748c" 
+                                />
+                            </TouchableOpacity>
+                        )}
+                    </View>
         </Shadow>
     );
 };

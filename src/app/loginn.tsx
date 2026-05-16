@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Image ,ScrollView, TouchableOpacity,KeyboardAvoidingView, Platform} from "react-native";
+import { View, Text, StyleSheet, Image ,ScrollView, TouchableOpacity,KeyboardAvoidingView, Platform, Alert} from "react-native";
 import Title from "../components/Title";
 import Input from "../components/Input";
 import {Button} from "../components/Buttonn";
@@ -17,6 +17,12 @@ const Login=()=>{
  
         const userEmail=email.trim();
         const userSenha=senha;
+        
+        const emailRegex = /\S+@\S+\.\S+/;
+        if (!emailRegex.test(email)) {
+            Alert.alert("Erro", "O e-mail digitado não é válido.");
+            return;
+        }
 
         if (!userEmail||!userSenha) {
             alert("Tem que preencher e-mail e senha.");
@@ -48,7 +54,7 @@ const Login=()=>{
 
                         <Input style={styles.senha} placeholder={"Senha"} value={senha} onChangeText={(text)=>setsenha(text)} keyboardType="default" secureTextEntry={true} autoCapitalize="none"/>
 
-                        <Button title="Entrar" onPress={handleLogin}/>
+                        <Button style={styles.button}title="Entrar" onPress={handleLogin}/>
 
                         <View style={styles.separatorContainer}>
                             <View style={styles.line} />
@@ -126,6 +132,9 @@ const styles=StyleSheet.create({
     },
     senha:{
         marginVertical:30
+    },
+    button:{
+        width:250,
     },
     separatorContainer:{
         flexDirection:"row",
